@@ -1,10 +1,7 @@
-from django.db.models import CharField, SlugField, CASCADE, ForeignKey, ImageField, SmallIntegerField, TextField
+from django.db.models import CharField, SlugField, CASCADE
 from django.utils.text import slugify
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
-
-from apps.product.models.product import upload_directory_name
-from apps.shared.models import BaseModel
 
 
 class Category(MPTTModel):
