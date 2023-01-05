@@ -9,4 +9,5 @@ router.register('product', ProductModelViewSet, 'product')
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('auth/', include('apps.user.urls')),
 ]
