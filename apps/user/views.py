@@ -42,7 +42,7 @@ class LoginView(RetrieveAPIView):
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-def get_object(self):
-    obj = get_object_or_404(self.get_queryset(), pk=self.kwargs["pk"])
-    self.check_object_permissions(self.request, obj)
-    return obj
+    def get_object(self):
+        obj = get_object_or_404(self.get_queryset(), pk=self.kwargs["pk"])
+        self.check_object_permissions(self.request, obj)
+        return obj
