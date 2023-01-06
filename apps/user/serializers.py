@@ -28,10 +28,10 @@ class UserCreateModelSerializer(ModelSerializer):
 class LoginSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'password')
+        fields = ('username', 'password',)
 
 
 class GetMeModelSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'phone')
+        fields = ('id', 'username', 'email', )
