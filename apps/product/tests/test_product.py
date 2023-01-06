@@ -15,7 +15,7 @@ class TestProductView:
         fake = Faker()
         product = baker.make(
             Product,
-            name = fake.random.choice(Product.Type.choices),
+            name = fake.name(),
         )
 
         return product
