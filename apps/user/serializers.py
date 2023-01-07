@@ -1,9 +1,8 @@
+from apps.user.models import User
 from rest_framework.fields import CharField
 from rest_framework.serializers import ModelSerializer
 from django.contrib.auth.hashers import make_password
 from rest_framework.exceptions import ValidationError
-
-from apps.user.models import User
 
 
 class UserCreateModelSerializer(ModelSerializer):
@@ -22,7 +21,7 @@ class UserCreateModelSerializer(ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username','email', 'password', 'confirm_password',)
+        fields = ('id', 'username', 'password', 'confirm_password',)
 
 
 class LoginSerializer(ModelSerializer):
@@ -31,7 +30,7 @@ class LoginSerializer(ModelSerializer):
         fields = ('username', 'password',)
 
 
-class GetMeModelSerializer(ModelSerializer):
+class LogOutSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', )
+        fields = ('id',)
