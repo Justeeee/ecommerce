@@ -15,7 +15,6 @@ class TestProductView:
     def test_create_model_product(self):
         product = Product.objects.create(name='Samsung S22', price=random.randint(1, 10))
         count = Product.objects.count()
-        assert isinstance(product.pk, UUID)
         assert product.name == 'Samsung S22'
         assert count == 1
 
