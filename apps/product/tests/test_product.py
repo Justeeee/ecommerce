@@ -72,3 +72,4 @@ class TestProductView:
         assert len(response.data) == 0
 
 
+print(1)
