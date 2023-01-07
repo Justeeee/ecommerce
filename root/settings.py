@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'apps.user',
-    'apps.shared',
     'apps.product',
 
     'django_filters',
@@ -80,6 +79,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'root.wsgi.application'
 
+
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -88,7 +88,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'ecommerce',
         'USER': 'postgres',
-        'PASSWORD': '1',
+        'PASSWORD': '2',
         'PORT': '5432',
         'HOST': 'localhost',
     }

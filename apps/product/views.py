@@ -2,7 +2,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from apps.product.models import Category, Product, Shop
 from apps.product.serializers import CategoryModelSerializer, ProductModelSerializer, ShopModelSerializer
-from product.filter import ProductFilter, ShopFilter
+from apps.product.filter import ProductFilter, ShopFilter
 
 
 class CategoryModelViewSet(ModelViewSet):

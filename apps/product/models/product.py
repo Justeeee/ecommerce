@@ -5,7 +5,8 @@ from django.db.models import ForeignKey, CASCADE, CharField, SlugField, DecimalF
     JSONField, UUIDField
 from django.utils.text import slugify
 
-from shared.models import BaseModel
+from apps.shared.models import BaseModel
+
 
 
 def upload_directory_name(instance, filename):

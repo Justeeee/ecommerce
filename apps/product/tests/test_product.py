@@ -4,10 +4,13 @@ from uuid import UUID
 import pytest
 from django.urls import reverse_lazy
 
-from product.models import Product
+from apps.product.models import Product
+
+from django.test import TestCase
 
 
-@pytest.mark.django_db
+
+
 class TestProductView:
     def test_create_model_product(self):
         product = Product.objects.create(name='Samsung S22', price=random.randint(1, 10))
