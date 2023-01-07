@@ -1,8 +1,8 @@
-from django.db import models
-
 # Create your models here.
-from django.db.models import Model, ForeignKey, CASCADE, CharField, SlugField, DateTimeField, DecimalField, \
-    SmallIntegerField, JSONField, TextField, SET_NULL, TextChoices
+from uuid import uuid4
+
+from django.db.models import ForeignKey, CASCADE, CharField, SlugField, DecimalField, \
+    JSONField, UUIDField
 from django.utils.text import slugify
 
 from shared.models import BaseModel
@@ -13,6 +13,7 @@ def upload_directory_name(instance, filename):
 
 
 class Product(BaseModel):
+    id = UUIDField(primary_key=True, unique=True, default=uuid4, editable=False)
     name = CharField(max_length=255)
     slug = SlugField(max_length=255, unique=True, blank=True, null=True)
     price = DecimalField(decimal_places=2, max_digits=9)

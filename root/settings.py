@@ -46,8 +46,6 @@ INSTALLED_APPS = [
     'mptt',
     'rest_framework',
     'drf_yasg',
-    'faker',
-    'model_bakery'
 
 ]
 
@@ -88,7 +86,7 @@ WSGI_APPLICATION = 'root.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'eccomerce',
+        'NAME': 'ecommerce',
         'USER': 'postgres',
         'PASSWORD': '1',
         'PORT': '5432',

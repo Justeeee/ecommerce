@@ -1,10 +1,13 @@
-from django.db.models import CharField, SlugField, TextField
+from uuid import uuid4
+
+from django.db.models import CharField, SlugField, TextField, UUIDField
 from django.utils.text import slugify
 
 from apps.shared.models import BaseModel
 
 
 class Shop(BaseModel):
+    id = UUIDField(primary_key=True, unique=True, default=uuid4, editable=False)
     name = CharField(max_length=255)
     slug = SlugField(max_length=255, unique=True, blank=True, null=True)
     info = TextField(max_length=255)
