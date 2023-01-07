@@ -17,8 +17,8 @@ class Product(BaseModel):
     name = CharField(max_length=255)
     slug = SlugField(max_length=255, unique=True, blank=True, null=True)
     price = DecimalField(decimal_places=2, max_digits=9)
-    category = ForeignKey('product.Category', CASCADE)
-    shop = ForeignKey('product.Shop', CASCADE)
+    category = ForeignKey('product.Category', CASCADE, null=True)
+    shop = ForeignKey('product.Shop', CASCADE, null=True)
     information = JSONField(default=dict, null=True, blank=True)
 
     def __str__(self):
