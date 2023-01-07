@@ -11,6 +11,7 @@ from django.test import TestCase
 
 
 
+@pytest.mark.django_db
 class TestProductView:
     def test_create_model_product(self):
         product = Product.objects.create(name='Samsung S22', price=random.randint(1, 10))
