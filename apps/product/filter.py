@@ -1,16 +1,15 @@
-import django_filters
+from django_filters.rest_framework import FilterSet
 
-from apps.product.models.product import Product
-from apps.product.models.shop import Shop
+from apps.product.models import Product, Shop
 
 
-class ProductFilter(django_filters.FilterSet):
+class ProductFilter(FilterSet):
     class Meta:
         model = Product
         fields = ['name', 'price', 'category', 'shop']
 
 
-class ShopFilter(django_filters.FilterSet):
+class ShopFilter(FilterSet):
     class Meta:
         model = Shop
-        fields = ['name',]
+        fields = ['name', ]

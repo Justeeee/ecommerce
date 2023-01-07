@@ -4,13 +4,13 @@ from uuid import UUID
 import pytest
 from django.urls import reverse_lazy
 
-from product.models.product import Product
+from product.models import Product
 
 
 @pytest.mark.django_db
 class TestProductView:
     def test_create_model_product(self):
-        product = Product.objects.create(name='Samsung S22', price=random.randint(1,10))
+        product = Product.objects.create(name='Samsung S22', price=random.randint(1, 10))
         count = Product.objects.count()
         assert isinstance(product.pk, UUID)
         assert product.name == 'Samsung S22'
@@ -29,8 +29,8 @@ class TestProductView:
 
     @pytest.fixture()
     def products(self):
-        Product.objects.create(name='Samsung S22',price=random.randint(1,10))
-        Product.objects.create(name='Macbook Pro',price=random.randint(1,10))
+        Product.objects.create(name='Samsung S22', price=random.randint(1, 10))
+        Product.objects.create(name='Macbook Pro', price=random.randint(1, 10))
 
     def test_product_list_api(self, client, products):
         url = reverse_lazy('product-list')
