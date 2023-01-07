@@ -41,10 +41,13 @@ INSTALLED_APPS = [
     'apps.user',
     'apps.shared',
     'apps.product',
+
+    'django_filters',
     'mptt',
-    'knox',
     'rest_framework',
-    'drf_yasg'
+    'drf_yasg',
+    'faker',
+    'model_bakery'
 
 ]
 
@@ -85,9 +88,9 @@ WSGI_APPLICATION = 'root.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ecommerce',
+        'NAME': 'eccomerce',
         'USER': 'postgres',
-        'PASSWORD': 'Muhammad571',
+        'PASSWORD': '1',
         'PORT': '5432',
         'HOST': 'localhost',
     }
@@ -95,7 +98,7 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
-
+AUTH_USER_MODEL = 'user.User'
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -133,27 +136,22 @@ STATIC_ROOT = os.path.join(BASE_DIR + 'static')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'user.User'
-
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny'
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'knox.auth.TokenAuthentication',
-        'rest_framework.authentication.TokenAuthentication',
-    ),
 
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
+
 
 SWAGGER_SETTINGS = {
-    'SECURITY_DEFINITIONS': {
-        'Basic': {
+   'SECURITY_DEFINITIONS': {
+      'Basic': {
             'type': 'basic'
-        }
-    }
+      }
+   }
 }
+

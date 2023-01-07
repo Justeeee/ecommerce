@@ -4,7 +4,8 @@ from django.db import models
 from django.db.models import Model, ForeignKey, CASCADE, CharField, SlugField, DateTimeField, DecimalField, \
     SmallIntegerField, JSONField, TextField, SET_NULL, TextChoices
 from django.utils.text import slugify
-from apps.shared.models import BaseModel
+
+from shared.models import BaseModel
 
 
 def upload_directory_name(instance, filename):
