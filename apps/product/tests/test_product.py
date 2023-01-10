@@ -32,7 +32,7 @@ class TestProductView:
 
     @pytest.fixture()
     def products(self):
-        Product.objects.create(name='Samsung S22', price=random.randint(1, 10))
+        Product.objects.create(name='Samsung S23', price=random.randint(1, 10))
         Product.objects.create(name='Macbook Pro', price=random.randint(1, 10))
 
     def test_product_list_api(self, client, products):
@@ -58,11 +58,13 @@ class TestProductView:
         '/api/v1/product?name=Samsung+S22'
         url = reverse_lazy('product-list')
         data = {
-            "id": "8ac39cfa-e7c4-4445-af73-e3599234a439",
+            "id": "f40f05a3-b51b-4737-9cb3-85e603a8f4be",
             "name": "Samsung S22",
         }
-        response = client.get
+        response = client.get(url,data)
+        return response.status_code == 200
 
+    @pytest.fixture()
     def products(self):
         Product.objects.create(name='Samsung S22', price=random.randint(1, 10))
         Product.objects.create(name='Macbook Pro', price=random.randint(1, 10))
@@ -87,14 +89,14 @@ class TestProductView:
 
     def test_product_filter_api(self, client, products):
         product = Product.objects.first()
-        '/api/v1/product?name=Samsung+S22'
         url = reverse_lazy('product-list')
         data = {
-            "id": "8ac39cfa-e7c4-4445-af73-e3599234a439",
-            "name": "Samsung S22",
+            "id" : "f40f05a3-b51b-4737-9cb3-85e603a8f4be",
+            "name": "Samsung S22"
         }
         response = client.get(url, data, content_type='application/json')
         assert response.status_code == 200
         assert response.data[0]['name'] == data['name']
         assert response.data[0]['id'] == str(product.pk)
-        assert len(response.data) == 2
+        assert len(response.data) == 1
+

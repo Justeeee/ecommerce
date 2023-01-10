@@ -9,7 +9,7 @@ from mptt.models import MPTTModel
 class Category(MPTTModel):
     id = UUIDField(primary_key=True, unique=True, default=uuid4, editable=False)
     name = CharField(max_length=255)
-    parent = TreeForeignKey('self', CASCADE, 'children', null=True, blank=True, )
+    parent = TreeForeignKey('self', CASCADE, 'children', null=True, blank=True )
     slug = SlugField(max_length=255, unique=True, blank=True)
 
     class MPTTMeta:
