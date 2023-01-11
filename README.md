@@ -3,9 +3,11 @@
 
 ## Pre-Requisites
 - Python 3.9
-- Pip
-- Git
-
+- Django
+- Django - filters
+- MPTT
+- Rest - framework
+- drf_yasg
 ## Steps to run:
 
 - In PipFile, the dependencies are mentioned. It is recommended to run the app inside a virtual environment to avoid conflict of existing dependencies.
