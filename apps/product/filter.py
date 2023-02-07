@@ -6,7 +6,7 @@ from apps.product.models import Product, Shop
 class ProductFilter(FilterSet):
     class Meta:
         model = Product
-        fields = ['name', 'price', 'category', 'shop']
+        fields = ['name', 'price', 'subcategory', 'shop']
 
 
 class ShopFilter(FilterSet):
