@@ -7,5 +7,3 @@ admin.site.register(Category)
 admin.site.register(SubCategory)
 admin.site.register(Shop)
 
-
-#TODO add user

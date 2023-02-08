@@ -1,6 +1,7 @@
 from django_filters.rest_framework import FilterSet
 
 from apps.product.models import Product, Shop
+from apps.user.models import User
 
 
 class ProductFilter(FilterSet):
@@ -14,4 +15,9 @@ class ShopFilter(FilterSet):
         model = Shop
         fields = ['name', ]
 
-# TODO add user filter
+
+class UserFilter(FilterSet):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'phone', 'username']
+

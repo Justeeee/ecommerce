@@ -20,7 +20,7 @@ class Product(BaseModel):
     price = DecimalField(decimal_places=2, max_digits=9)
     subcategory = ForeignKey('product.SubCategory', CASCADE, null=True)
     shop = ForeignKey('product.Shop', CASCADE, null=True)
-    # TODO add owner
+    owner = ForeignKey('user.User', CASCADE)
     information = JSONField(default=dict, null=True, blank=True)
 
     def __str__(self):
