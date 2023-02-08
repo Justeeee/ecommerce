@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.generics import CreateAPIView, RetrieveAPIView
 from rest_framework.response import Response
 from apps.user.serializers import UserCreateModelSerializer, LoginSerializer
-# from user.serializers import LogOutSerializer
+from apps.user.serializers import LogOutSerializer
 
 
 class UserCreateApiView(CreateAPIView):
@@ -30,14 +30,14 @@ class UserLoginView(RetrieveAPIView):
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-# class UserLogOutView(RetrieveAPIView):
-#     serializer_class = LogOutSerializer
-#     queryset = User.objects.all()
-#
-#     def post(self, request):
-#         if request.user.is_authenticated:
-#             logout(request)
-#             data = {'success': 'Sucessfully logged out'}
-#             return Response(data=data, status=status.HTTP_200_OK)
-#         else:
-#             return Response(status=status.HTTP_400_BAD_REQUEST)
+class UserLogOutView(RetrieveAPIView):
+    serializer_class = LogOutSerializer
+    queryset = User.objects.all()
+
+    def post(self, request):
+        if request.user.is_authenticated:
+            logout(request)
+            data = {'success': 'Sucessfully logged out'}
+            return Response(data=data, status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
