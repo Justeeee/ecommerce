@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 
     'apps.user',
     'apps.product',
-
+    # Third-party apps
     'django_filters',
     'mptt',
     'rest_framework',
@@ -78,6 +78,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'root.wsgi.application'
+AUTH_USER_MODEL = 'user.User'
 
 
 # Database
@@ -96,7 +97,6 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
-AUTH_USER_MODEL = 'user.User'
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
