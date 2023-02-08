@@ -20,10 +20,14 @@ class Product(BaseModel):
     price = DecimalField(decimal_places=2, max_digits=9)
     subcategory = ForeignKey('product.SubCategory', CASCADE, null=True)
     shop = ForeignKey('product.Shop', CASCADE, null=True)
+    # TODO add owner
     information = JSONField(default=dict, null=True, blank=True)
 
     def __str__(self):
         return f'{self.name}'
+
+    class Meta:
+        verbose_name_plural = 'Products'
 
     def get_unique_slug(self):
         slug = slugify(self.name)

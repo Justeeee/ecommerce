@@ -13,3 +13,5 @@ class ShopFilter(FilterSet):
     class Meta:
         model = Shop
         fields = ['name', ]
+
+# TODO add user filter
