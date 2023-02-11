@@ -2,7 +2,7 @@
 from uuid import uuid4
 
 from django.db.models import ForeignKey, CASCADE, CharField, SlugField, DecimalField, \
-    JSONField, UUIDField
+    JSONField, UUIDField, IntegerField
 from django.utils.text import slugify
 
 from apps.shared.models import BaseModel
@@ -19,6 +19,7 @@ class Product(BaseModel):
     slug = SlugField(max_length=255, unique=True, blank=True, null=True)
     price = DecimalField(decimal_places=2, max_digits=9)
     subcategory = ForeignKey('product.SubCategory', CASCADE, null=True)
+    delivery_time = IntegerField()
     shop = ForeignKey('product.Shop', CASCADE, null=True)
     owner = ForeignKey('user.User', CASCADE)
     information = JSONField(default=dict, null=True, blank=True)
