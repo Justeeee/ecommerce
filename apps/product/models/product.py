@@ -21,7 +21,6 @@ class Product(BaseModel):
     subcategory = ForeignKey('product.SubCategory', CASCADE, null=True)
     delivery_time = IntegerField()
     shop = ForeignKey('product.Shop', CASCADE, null=True)
-    owner = ForeignKey('user.User', CASCADE)
     information = JSONField(default=dict, null=True, blank=True)
 
     def __str__(self):

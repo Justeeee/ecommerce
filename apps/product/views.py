@@ -4,7 +4,7 @@ from apps.product.models import Category, Product, Shop
 from apps.product.models.category import SubCategory
 from apps.product.serializers import CategoryModelSerializer, ProductModelSerializer, ShopModelSerializer, \
     SubCategoryModelSerializer
-from apps.product.filter import ProductFilter, ShopFilter
+from apps.product.filter import ProductFilter, ShopFilter, ProductOfShop
 
 
 class CategoryModelViewSet(ModelViewSet):
@@ -27,3 +27,9 @@ class ShopModelViewSet(ModelViewSet):
     queryset = Shop.objects.all()
     serializer_class = ShopModelSerializer
     filterset_class = ShopFilter
+
+
+class ShopAllProductsViewSet(ModelViewSet):
+    queryset = Product.objects.filter('shop')
+    serializer_class = ProductModelSerializer
+    filterset_class = ProductOfShop

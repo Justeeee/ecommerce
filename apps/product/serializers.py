@@ -26,3 +26,8 @@ class ShopModelSerializer(ModelSerializer):
     class Meta:
         model = Shop
         fields = ('id', 'name', 'info')
+
+class ProductOfShopSerializer(ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ('id', 'name' 'info', 'shop')
