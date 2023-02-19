@@ -16,6 +16,7 @@ def upload_directory_name(instance, filename):
 class Product(BaseModel):
     id = UUIDField(primary_key=True, unique=True, default=uuid4, editable=False)
     name = CharField(max_length=255)
+    count = IntegerField(default=1)
     slug = SlugField(max_length=255, unique=True, blank=True, null=True)
     price = DecimalField(decimal_places=2, max_digits=9)
     subcategory = ForeignKey('product.SubCategory', CASCADE, null=True)

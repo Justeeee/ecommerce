@@ -1,10 +1,10 @@
 from rest_framework.viewsets import ModelViewSet
 
-from apps.product.models import Category, Product, Shop
+from apps.product.filter import ProductFilter, ShopFilter, ShopProductsFilter, CartFilter
+from apps.product.models import Category, Product, Shop, Cart
 from apps.product.models.category import SubCategory
 from apps.product.serializers import CategoryModelSerializer, ProductModelSerializer, ShopModelSerializer, \
-    SubCategoryModelSerializer
-from apps.product.filter import ProductFilter, ShopFilter, ProductOfShop
+    SubCategoryModelSerializer, ShopProductsSerializer, CartModelSerializer
 
 
 class CategoryModelViewSet(ModelViewSet):
@@ -29,7 +29,17 @@ class ShopModelViewSet(ModelViewSet):
     filterset_class = ShopFilter
 
 
-class ShopAllProductsViewSet(ModelViewSet):
-    queryset = Product.objects.filter('shop')
-    serializer_class = ProductModelSerializer
-    filterset_class = ProductOfShop
+class ShopProductsViewSet(ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ShopProductsSerializer
+    filterset_class = ShopProductsFilter
+
+
+class CartView(ModelViewSet):
+    queryset = Cart.objects.all()
+    serializer_class = CartModelSerializer
+    filterset_class = CartFilter
+
+    # def get_queryset(self):
+    #     qs = super().get_queryset()
+    #     return qs.filter(user=self.request.user).first

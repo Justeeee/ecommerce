@@ -1,5 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
+from apps.product.models import Cart
 from apps.product.models.category import Category, SubCategory
 from apps.product.models.product import Product
 from apps.product.models.shop import Shop
@@ -10,6 +11,7 @@ class CategoryModelSerializer(ModelSerializer):
         model = Category
         fields = ('id', 'name',)
 
+
 class SubCategoryModelSerializer(ModelSerializer):
     class Meta:
         model = SubCategory
@@ -19,7 +21,7 @@ class SubCategoryModelSerializer(ModelSerializer):
 class ProductModelSerializer(ModelSerializer):
     class Meta:
         model = Product
-        fields = ('id', 'name', 'price', 'subcategory', 'information', 'shop')
+        fields = ('id', 'name', 'price', 'count', 'subcategory', 'information', 'shop')
 
 
 class ShopModelSerializer(ModelSerializer):
@@ -27,7 +29,14 @@ class ShopModelSerializer(ModelSerializer):
         model = Shop
         fields = ('id', 'name', 'info')
 
-class ProductOfShopSerializer(ModelSerializer):
+
+class ShopProductsSerializer(ModelSerializer):
     class Meta:
         model = Product
-        fields = ('id', 'name' 'info', 'shop')
+        fields = '__all__'
+
+
+class CartModelSerializer(ModelSerializer):
+    class Meta:
+        model = Cart
+        fields = '__all__'

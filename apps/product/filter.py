@@ -1,6 +1,6 @@
 from django_filters.rest_framework import FilterSet
 
-from apps.product.models import Product, Shop
+from apps.product.models import Product, Shop, Cart
 from apps.product.serializers import ProductModelSerializer
 from apps.user.models import User
 
@@ -23,9 +23,13 @@ class UserFilter(FilterSet):
         fields = ['first_name', 'last_name', 'phone', 'username']
 
 
-class ProductOfShop(FilterSet):
-    serializer_class = ProductModelSerializer
+class ShopProductsFilter(FilterSet):
+    class Meta:
+        model = Product
+        fields = ['shop_id', ]
 
-    def get_queryset(self):
-        slug = self.request.query_params.get('slug')
-        return Product.objects.filter(shop__id=slug)
+
+class CartFilter(FilterSet):
+    class Meta:
+        model = Cart
+        fields = ['user', 'product']
