@@ -3,13 +3,12 @@ from django_filters.rest_framework import FilterSet
 
 from apps.product.models import Product, Shop, Cart
 from apps.product.models.cart import Liked
-from apps.product.serializers import ProductModelSerializer
 from apps.user.models import User
 
 
 class ProductFilter(FilterSet):
-    from_price = NumberFilter(field_name='from ', lookup_expr='gte')
-    to_price = NumberFilter(field_name='to ', lookup_expr='lte')
+    from_price = NumberFilter(field_name='price', lookup_expr='gte')
+    to_price = NumberFilter(field_name='price', lookup_expr='lte')
 
     class Meta:
         model = Product

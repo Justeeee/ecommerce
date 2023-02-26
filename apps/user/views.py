@@ -1,9 +1,12 @@
 from django.contrib.auth import authenticate, login, logout
+from rest_framework.viewsets import ModelViewSet
+
 from apps.user.models import User
 from rest_framework import status
 from rest_framework.generics import CreateAPIView, RetrieveAPIView
 from rest_framework.response import Response
-from apps.user.serializers import UserCreateModelSerializer, LoginSerializer
+from apps.user.serializers import UserCreateModelSerializer, LoginSerializer, ClientModelSerializer, \
+    MerchantModelSerializer, UserModelSerializer
 from apps.user.serializers import LogOutSerializer
 
 
@@ -41,3 +44,18 @@ class UserLogOutView(RetrieveAPIView):
             return Response(data=data, status=status.HTTP_200_OK)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class ClientModelViewSet(ModelViewSet):
+    queryset = User.objects.filter(type=User.Type.CLIENT)
+    serializer_class = ClientModelSerializer
+
+
+class MerchantModelViewSet(ModelViewSet):
+    queryset = User.objects.filter(type=User.Type.MERCHANT)
+    serializer_class = MerchantModelSerializer
+
+
+class UserModelViewSet(ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserModelSerializer

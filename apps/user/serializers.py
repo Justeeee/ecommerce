@@ -34,3 +34,22 @@ class LogOutSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = ('id',)
+
+
+class ClientModelSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email')
+
+
+class MerchantModelSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email', 'date_joined')
+
+class UserModelSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
+        read_only_fields = ('id',)
+
