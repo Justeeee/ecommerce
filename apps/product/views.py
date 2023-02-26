@@ -1,5 +1,8 @@
 from django.db import transaction
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.viewsets import ModelViewSet
 
 from apps.product.filter import ProductFilter, ShopFilter, ShopProductsFilter, CartFilter, LikedFilter
@@ -24,6 +27,9 @@ class ProductModelViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductModelSerializer
     filterset_class = ProductFilter
+    filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
+    search_fields = ['name']
+    ordering_fields = ['price']
 
 
 class ShopModelViewSet(ModelViewSet):
@@ -38,23 +44,31 @@ class ShopProductsViewSet(ModelViewSet):
     filterset_class = ShopProductsFilter
 
 
-class CartView(ModelViewSet):
-    queryset = Cart.objects.all()
-    serializer_class = CartModelSerializer
-    filterset_class = CartFilter
-
-    @transaction.atomic
-    def confirm_order(request, order_id):
-        order = get_object_or_404(Cart, id=id)
-        for line_item in order.line_items.all():
-            product = line_item.product
-            quantity = line_item.quantity
-            product.available_inventory -= quantity
-            product.save()
-        # other order confirmation logic
-
-
 class LikedView(ModelViewSet):
     queryset = Liked.objects.all()
     serializer_class = LikedModelSerializer
     filterset_class = LikedFilter
+
+
+def add_product_to_cart(request):
+    product_id = request.POST.get('product_id')
+    customer_id = request.POST.get('customer_id')
+    product = Product.objects.get(id=product_id)
+
+    cart, created = Cart.objects.get_or_create(
+        customer_id=customer_id,
+        product_id=product_id
+    )
+
+    if created:
+        cart.quantity += 1
+
+        if cart.quantity > product.stock:
+            return  # raise error
+
+        cart.save()
+
+        product.stock -= cart.quantity
+        product.save()
+    else:
+        return  # raise error
