@@ -2,11 +2,10 @@
 from uuid import uuid4
 
 from django.db.models import ForeignKey, CASCADE, CharField, SlugField, DecimalField, \
-    JSONField, UUIDField, IntegerField
+    JSONField, UUIDField, IntegerField, ImageField
 from django.utils.text import slugify
 
 from apps.shared.models import BaseModel
-
 
 
 def upload_directory_name(instance, filename):
@@ -44,3 +43,11 @@ class Product(BaseModel):
         if force_update is True:
             self.slug = slugify(self.name)
         super().save(force_insert, force_update, using, update_fields)
+
+
+class ProductImages(BaseModel):
+    product = ForeignKey('product.Product', CASCADE)
+    image = ImageField(upload_to=upload_directory_name)
+
+    def __str__(self):
+        return f'{self.product.name} -> {self.image.name}'

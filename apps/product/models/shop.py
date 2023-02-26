@@ -1,6 +1,6 @@
 from uuid import uuid4
 
-from django.db.models import CharField, SlugField, TextField, UUIDField, ForeignKey, CASCADE
+from django.db.models import CharField, SlugField, TextField, UUIDField, ForeignKey, CASCADE, ImageField
 from django.utils.text import slugify
 
 from apps.shared.models import BaseModel
@@ -12,6 +12,7 @@ class Shop(BaseModel):
     name = CharField(max_length=255)
     slug = SlugField(max_length=255, unique=True, blank=True, null=True)
     info = TextField(max_length=255)
+    photo = ImageField(upload_to='media/shops/')
 
     def __str__(self):
 

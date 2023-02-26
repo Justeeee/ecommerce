@@ -1,10 +1,13 @@
+from django.db import transaction
+from django.shortcuts import get_object_or_404
 from rest_framework.viewsets import ModelViewSet
 
-from apps.product.filter import ProductFilter, ShopFilter, ShopProductsFilter, CartFilter
+from apps.product.filter import ProductFilter, ShopFilter, ShopProductsFilter, CartFilter, LikedFilter
 from apps.product.models import Category, Product, Shop, Cart
+from apps.product.models.cart import Liked
 from apps.product.models.category import SubCategory
 from apps.product.serializers import CategoryModelSerializer, ProductModelSerializer, ShopModelSerializer, \
-    SubCategoryModelSerializer, ShopProductsSerializer, CartModelSerializer
+    SubCategoryModelSerializer, ShopProductsSerializer, CartModelSerializer, LikedModelSerializer
 
 
 class CategoryModelViewSet(ModelViewSet):
@@ -40,6 +43,18 @@ class CartView(ModelViewSet):
     serializer_class = CartModelSerializer
     filterset_class = CartFilter
 
-    # def get_queryset(self):
-    #     qs = super().get_queryset()
-    #     return qs.filter(user=self.request.user).first
+    @transaction.atomic
+    def confirm_order(request, order_id):
+        order = get_object_or_404(Cart, id=id)
+        for line_item in order.line_items.all():
+            product = line_item.product
+            quantity = line_item.quantity
+            product.available_inventory -= quantity
+            product.save()
+        # other order confirmation logic
+
+
+class LikedView(ModelViewSet):
+    queryset = Liked.objects.all()
+    serializer_class = LikedModelSerializer
+    filterset_class = LikedFilter

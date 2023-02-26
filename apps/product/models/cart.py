@@ -10,3 +10,7 @@ class Cart(Model):
     def total_price(self):
         return sum(self.user.cart_set.values_list('product__price', flat=True))
 
+
+class Liked(Model):
+    product = ForeignKey('product.Product', CASCADE)
+    user = ForeignKey('user.User', CASCADE)
